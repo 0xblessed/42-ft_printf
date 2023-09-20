@@ -14,17 +14,6 @@
 #include <unistd.h>
 #include <stdio.h>
 
-void ft_imprime(char *str)
-{
-    int i = 0;
-
-    while (str[i] != '\0')
-    {
-        write(1, &str[i], 1);
-        i++;
-    }
-}
-
 void ft_putchar(int c)
 { 
     write(1, &c, 1);

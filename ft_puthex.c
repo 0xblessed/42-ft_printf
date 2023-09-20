@@ -30,7 +30,7 @@ void filtrohex(int contador, int numero, int flag)
     ft_putchar(str[numero]);
 }
 
-void    ft_puthex_may(void *str, int *len)
+void    ft_puthex_may(unsigned int numero, int *len)
 {
    if (numero < 0)
     {
@@ -45,12 +45,10 @@ void    ft_puthex_may(void *str, int *len)
     ft_putchar('\n');
 }
 
-void    ft_puthex_min(void *str, int *len)
+void    ft_puthex_min(unsigned int numero, int *len)
 {
    if (numero < 0)
-    {
         numero *= -1;
-    }
     if (numero == 0)
     {
         ft_putchar('0');
