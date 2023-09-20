@@ -57,3 +57,23 @@ void    ft_puthex_min(unsigned int numero, int *len)
     filtrohex(numero / 16, numero % 16, 1);
     ft_putchar('\n');
 }
+
+void    ft_puthex_long(unsigned long numero, int *len)
+{
+    int x;
+    if (x == 0)
+    {
+        ft_putchar('0');
+        ft_putchar('x');
+        x = 1;
+    }
+   if (numero < 0)
+        numero *= -1;
+    if (numero == 0)
+    {
+        ft_putchar('0');
+        return ;
+    }
+    filtrohex(numero / 16, numero % 16, 1);
+    ft_putchar('\n');
+}

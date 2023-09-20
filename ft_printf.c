@@ -52,14 +52,12 @@ void comprueba_tipo(char *str, va_list ap)
     {
         if (str[i] == '%')
         {
-            if (str[i + 1] == 'd')
-                ft_putentero(va_arg(ap, int));
-            else if(str[i + 1] == 'i')
+            if (str[i + 1] == 'd' || str[i + 1] == 'i')
                 ft_putentero(va_arg(ap, int));
             else if (str[i + 1] == 's')
                 ft_putstr(va_arg(ap, char *));
             else if(str[i + 1] == 'p')//unsigned long
-                write(1, "\nEs una string\n", 15);
+                ft_puthex_min(va_arg(ap, unsigned long));
             else if(str[i + 1] == 'u')//unsigned int
                 ft_imprime("\nEs un unsigned int\n");
             else if(str[i + 1] == '%')
@@ -71,9 +69,7 @@ void comprueba_tipo(char *str, va_list ap)
             i++;
         }
         else
-        {
             ft_putchar(str[i]);
-        }
         i++;
     }
 }
