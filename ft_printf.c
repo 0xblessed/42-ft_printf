@@ -64,29 +64,21 @@ void comprueba_tipo(char *str, va_list ap)
         if (str[i] == '%')
         {
             if (str[i + 1] == 'd')
-            {
                 ft_putentero(va_arg(ap, int));
-            }
             else if(str[i + 1] == 'i')
-            {
                 ft_putentero(va_arg(ap, int));
-            }
             else if (str[i + 1] == 's')
-            {
                 ft_putstr(va_arg(ap, char *));
-            }
             else if(str[i + 1] == 'p')//unsigned long
-            {
                 write(1, "\nEs una string\n", 15);
-            }
             else if(str[i + 1] == 'u')//unsigned int
-            {
                 ft_imprime("\nEs un unsigned int\n");
-            }
-            else if(str[i + 1] == '%')//putchar
-            {
-                ft_imprime("\nEs un porcentaje\n");
-            }
+            else if(str[i + 1] == '%')
+                ft_putchar('%');
+            else if(str[i + 1] == 'x')
+                ft_puthex_min(va_arg(ap, unsigned int));
+            else if(str[i + 1] == 'X')
+                ft_puthex_may(va_arg(ap, unsigned int));
             i++;
         }
         else
@@ -96,6 +88,7 @@ void comprueba_tipo(char *str, va_list ap)
         i++;
     }
 }
+
 int ft_printf(char const *str, ...)
 {
     va_list    ap;
