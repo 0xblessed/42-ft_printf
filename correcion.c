@@ -2,39 +2,38 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h> // Necesario para strcpy
 
 void ft_putchar(int c)
 {
     write(1, &c, 1);
 }
 
-size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
+size_t  ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
-	size_t	i;
-	size_t	f;
+        size_t  i;
+        size_t  f;
 
-	f = strlen(src);
-	if (src[f] != '\0')
-	{
-		f++;
-	}
-	if (!dst || !src)
-		return (0);
-	if (dstsize > 0)
-	{
-		i = 0;
-		while (src[i] != '\0' && i < (dstsize - 1))
-		{
-			dst[i] = src[i];
-			i++;
-		}
-		dst[i] = '\0';
-	}
-	return (f);
+        f = ft_strlen(src);
+        if (src[f] != '\0')
+        {
+                f++;
+        }
+        if (!dst || !src)
+                return (0);
+        if (dstsize > 0)
+        {
+                i = 0;
+                while (src[i] != '\0' && i < (dstsize - 1))
+                {
+                        dst[i] = src[i];
+                        i++;
+                }
+                dst[i] = '\0';
+        }
+        return (f);
 }
 
-void filtrohex(char contador, char numero, int flag)
+void filtrohex(unsigned int numero, int flag)
 {
     char *str;
 
@@ -45,41 +44,32 @@ void filtrohex(char contador, char numero, int flag)
         ft_strlcpy(str, "0123456789ABCDEF", 17);
     else if (flag == 1)
         ft_strlcpy(str, "0123456789abcdef", 17);
-    if (contador > 0 || numero > 0)
-    {
-        filtrohex(contador / 16, contador % 16, flag);
-    }
-    if (numero >= 10)
-        ft_putchar(str[numero]);
-    else if (contador > 0 || numero > 0)
-        ft_putchar(' ');
+
+    if (numero >= 16)
+        filtrohex(numero / 16, flag);
+
+    ft_putchar(str[numero % 16]);
     free(str);
 }
 
 void ft_puthex_may(unsigned int numero)
 {
-    if (numero < 0)
-    {
-        numero *= -1;
-    }
     if (numero == 0)
     {
         ft_putchar('0');
-        return ;
+        return;
     }
-    filtrohex((char)(numero / 16), (char)(numero % 16), 0);
+    filtrohex(numero, 0);
 }
 
 void ft_puthex_min(unsigned int numero)
 {
-    if (numero < 0)
-        numero *= -1;
     if (numero == 0)
     {
         ft_putchar('0');
-        return ;
+        return;
     }
-    filtrohex(numero / 16, numero % 16, 1);
+    filtrohex(numero, 1);
 }
 
 void ft_puthex_long(unsigned long numero)
@@ -97,9 +87,9 @@ void ft_puthex_long(unsigned long numero)
     if (numero == 0)
     {
         ft_putchar('0');
-        return ;
+        return;
     }
-    filtrohex(numero / 16, numero % 16, 1);
+    filtrohex(numero, 1);
 }
 
 void comprueba_tipo(char *str, va_list ap)
@@ -136,10 +126,23 @@ int ft_printf(char const *str, ...)
 
 int main()
 {
-    printf("Original : Mayus %X Minusculas %x  la p %p\n", 222, 222, (void *)445);
-    
-    ft_printf("Mía      : Mayus %X Minusculas %x  la p %p", 222, 222, (void *)445);
+    printf("Original : Mayus %X Minusculas %x  la p %p\n", 22352, 222, (void *)445);
+    ft_printf("Mía      : Mayus %X Minusculas %x  la p %p\n", 22352, 222, (void *)445);
+
+    printf("Original : Mayus %X Minusculas %x  la p %p\n", 255, 15, (void *)1234);
+    ft_printf("Mía      : Mayus %X Minusculas %x  la p %p\n", 255, 15, (void *)1234);
+
+    printf("Original : Mayus %X Minusculas %x  la p %p\n", 0, 0, (void *)0);
+    ft_printf("Mía      : Mayus %X Minusculas %x  la p %p\n", 0, 0, (void *)0);
+
+    printf("Original : Mayus %X Minusculas %x  la p %p\n", 4563, 0, (void *)0);
+    ft_printf("Mía      : Mayus %X Minusculas %x  la p %p\n", 4563, 0, (void *)0);
+
+    printf("Original : Mayus %X Minusculas %x  la p %p\n", 33, 0, (void *)0);
+    ft_printf("Mía      : Mayus %X Minusculas %x  la p %p\n", 33, 0, (void *)0);
+
+    printf("Original : Mayus %X Minusculas %x  la p %p\n", 6, 0, (void *)0);
+    ft_printf("Mía      : Mayus %X Minusculas %x  la p %p\n", 6, 0, (void *)0);
 
     return (0);
 }
-
