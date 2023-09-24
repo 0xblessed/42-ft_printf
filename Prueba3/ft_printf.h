@@ -12,7 +12,7 @@ void    comprueba_tipo(char *str, va_list ap, int *len);
 void    ft_puthex_long(unsigned long numero, int *len);
 void    ft_puthex_min(unsigned int numero, int *len);
 void    ft_puthex_may(unsigned int numero, int *len);
-void    ft_puthex_p(unsigned int numero,  int *len, int x);
+void    ft_puthex_p(unsigned long numero,  int *len, int x);
 void    filtrohex(unsigned int numero, int flag, int *len);
 size_t  ft_strlcpy(char *dst, const char *src, size_t dstsize);
 void	ft_putentero(int n, int *len);

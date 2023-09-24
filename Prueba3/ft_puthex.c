@@ -64,34 +64,29 @@ void ft_puthex_min(unsigned int numero,  int *len)
     filtrohex(numero, 1, len);
 }
 
-void ft_puthex_p(unsigned int numero,  int *len, int x)
+void ft_puthex_p(unsigned long numero, int *len, int x)
 {
+    char buffer[17];
+    int i = 16;
+
     if (x == 0)
     {
         ft_putchar('0', len);
-		ft_putchar('x', len);
+	    ft_putchar('x', len);
         x = 1;
     }
-    if (numero < 0)
-    {
-        ft_putstr("ffffffff", len);
-    }
     if (numero == 0)
     {
         ft_putchar('0', len);
         return;
     }
-    filtrohex(numero, 1, len);
-}
+    buffer[i] = '\0';
 
-void ft_puthex_long(unsigned long numero,  int *len)
-{
-    if (numero < 0)
-        numero *= -1;
-    if (numero == 0)
+    while (numero > 0 && i > 0)
     {
-        ft_putchar('0', len);
-        return;
+        i--;
+        buffer[i] = "0123456789abcdef"[numero % 16];
+        numero /= 16;
     }
-    filtrohex(numero, 1, len);
+    ft_putstr(&buffer[i], len);
 }

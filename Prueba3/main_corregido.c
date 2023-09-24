@@ -84,7 +84,7 @@ void	comprueba_tipo(char *str, va_list ap, int *len)
 			else if (str[i + 1] == 's')
 				ft_putstr(va_arg(ap, char *), len);
 			else if (str[i + 1] == 'p')
-				ft_puthex_p(va_arg(ap, unsigned int), len, 0);
+				ft_puthex_p(va_arg(ap, unsigned long), len, 0);
 			else if (str[i + 1] == 'u')
 				ft_putentero_un(va_arg(ap, unsigned int), len);
 			else if (str[i + 1] == '%')
