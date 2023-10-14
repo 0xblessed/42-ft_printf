@@ -6,11 +6,11 @@
 #    By: amunoz-b <amunoz-b@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/22 12:17:09 by amunoz-b          #+#    #+#              #
-#    Updated: 2023/09/27 16:11:57 by amunoz-b         ###   ########.fr        #
+#    Updated: 2023/10/14 15:57:35 by amunoz-b         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS = ft_puthex.c main_corregido.c
+SRCS = ft_puthex.c ft_putbasics.c main.c
 
 OBJS = ${SRCS:.c=.o}
 

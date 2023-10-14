@@ -12,65 +12,15 @@
 
 #include "ft_printf.h"
 
-int	ft_putchar(int c, int *len)
+int	ft_putchar(int c, int *len, int *error)
 {
 	if (write(1, &c, 1) == -1)
-		return (-1);
+		*error = -1;
 	(*len)++;
 	return (*len);
 }
 
-void	ft_putstr(char *str, int *len)
-{
-	size_t	i;
-
-	i = 0;
-	if (str == NULL)
-	{
-		ft_putstr("(null)", len);
-		return ;
-	}
-	while (str[i])
-		ft_putchar(str[i++], len);
-}
-
-void	ft_putentero(int n, int *len)
-{
-	if (n == INT_MIN)
-	{
-		//if (write(1, "-2147483648", 11) == -1)
-		ft_putstr("-2147483648", len);
-		return ;
-	}
-	else
-	{
-		if (n < 0)
-		{
-			ft_putchar('-', len);
-			n = -n;
-		}
-		if (n >= 10)
-		{
-			ft_putentero(n / 10, len);
-			ft_putentero(n % 10, len);
-		}
-		else
-			ft_putchar(n % 10 + 48, len);	
-	}
-}
-
-void	ft_putentero_un(unsigned int n, int *len)
-{
-	if (n >= 10)
-	{
-		ft_putentero(n / 10, len);
-		ft_putentero(n % 10, len);
-	}
-	else
-		ft_putchar((n % 10) + '0', len);
-}
-
-void	comprueba_tipo(char *str, va_list ap, int *len)
+void	comprueba_tipo(char *str, va_list ap, int *len, int *error)
 {
 	int	i;
 
@@ -80,25 +30,31 @@ void	comprueba_tipo(char *str, va_list ap, int *len)
 		if (str[i] == '%')
 		{
 			if (str[i + 1] == 'd' || str[i + 1] == 'i')
-				ft_putentero(va_arg(ap, int), len);
+				ft_putentero(va_arg(ap, int), len, error);
 			else if (str[i + 1] == 's')
-				ft_putstr(va_arg(ap, char *), len);
+				ft_putstr(va_arg(ap, char *), len, error);
 			else if (str[i + 1] == 'p')
-				ft_puthex_p(va_arg(ap, unsigned long), len, 0);
+				ft_puthex_p(va_arg(ap, unsigned long), len, 0, error);
 			else if (str[i + 1] == 'u')
-				ft_putentero_un(va_arg(ap, unsigned int), len);
+				ft_putentero_un(va_arg(ap, unsigned int), len, error);
 			else if (str[i + 1] == '%')
-				ft_putchar('%', len);
+				ft_putchar('%', len, error);
 			else if (str[i + 1] == 'x')
-				ft_puthex_min(va_arg(ap, unsigned int), len);
+				ft_puthex_min(va_arg(ap, unsigned int), len, error);
 			else if (str[i + 1] == 'X')
-				ft_puthex_may(va_arg(ap, unsigned int), len);
+				ft_puthex_may(va_arg(ap, unsigned int), len, error);
 			else if (str[i + 1] == 'c')
-				ft_putchar(va_arg(ap, int), len);
+				ft_putchar(va_arg(ap, int), len, error);
 			i++;
+			if (*error < 0)
+				break;
 		}
 		else
-			ft_putchar(str[i], len);
+			ft_putchar(str[i], len, error);
+		if (*error < 0)
+		{
+			break;
+		}
 		i++;
 	}
 }
@@ -107,10 +63,16 @@ int	ft_printf(char const *str, ...)
 {
 	va_list	ap;
 	int		len;
+	int		error;
 
 	len = 0;
+	error = 0;
 	va_start(ap, str);
-	comprueba_tipo((char *)str, ap, &len);
+	comprueba_tipo((char *)str, ap, &len, &error);
 	va_end(ap);
+	if (error < 0)
+	{
+		return (-1);
+	}
 	return (len);
 }
