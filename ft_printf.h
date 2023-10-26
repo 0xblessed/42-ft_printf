@@ -6,7 +6,7 @@
 /*   By: amunoz-b <amunoz-b@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 15:07:34 by amunoz-b          #+#    #+#             */
-/*   Updated: 2023/10/14 15:10:33 by amunoz-b         ###   ########.fr       */
+/*   Updated: 2023/10/14 17:44:42 by amunoz-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,6 @@ void	ft_puthex_may(unsigned int numero, int *len);
 void	ft_puthex_p(unsigned long numero, int *len, int x);
 void	filtrohex(unsigned int numero, int flag, int *len);
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
+size_t	ft_strlen(const char *c);
 void	ft_putentero(int n, int *len);
 void	ft_putentero_un(unsigned int n, int *len);

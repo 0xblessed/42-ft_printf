@@ -6,11 +6,23 @@
 /*   By: amunoz-b <amunoz-b@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 17:05:44 by amunoz-b          #+#    #+#             */
-/*   Updated: 2023/10/03 17:06:15 by amunoz-b         ###   ########.fr       */
+/*   Updated: 2023/10/14 17:44:44 by amunoz-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+size_t	ft_strlen(const char *c)
+{
+	size_t	i;
+
+	i = 0;
+	while (c[i] != '\0')
+	{
+		i++;
+	}
+	return (i);
+}
 
 void	ft_putstr(char *str, int *len)
 {
